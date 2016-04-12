@@ -21,16 +21,6 @@ import {Http} from 'angular2/http';
     `,
   directives: [NavigationBar,ROUTER_DIRECTIVES]
 })
-/*
-@RouteConfig([]
-  [
-  { path: '/', name: 'root', redirectTo: ['/Templates']},
-  { path: '/templates', name: 'Templates', component: TemplatesPage, useAsDefault: true},
-  { path: '/pages', name: 'Pages', component: PagesPage},
-  { path: '/content', name: 'Content', component: ContentPage},
-]
-)
- */
 export class KristalcmsApp {
   menuItems:RouterItemType[];
   data: Object = {};
@@ -45,7 +35,7 @@ export class KristalcmsApp {
     router.config(this.routeDefinitions);
     this.menuItems = [
       {name: 'Templates', link: ['/Templates'], disabled: false},
-      {name: 'Pages', link: ['/Pages'], disabled: true},
+      {name: 'Pages', link: ['/Pages'], disabled: false},
       {name: 'Content', link: ['/Content'], disabled: false}
     ];
   }

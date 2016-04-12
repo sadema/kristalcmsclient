@@ -2,7 +2,6 @@ import {Component,Input} from 'angular2/core';
 import {RouterItemType} from '../core/router-item';
 import {RouterItem} from "../core/router-item.component";
 import {Router,RouteDefinition} from 'angular2/router';
-import {RouterItemService} from "./router-item-service";
 
 @Component({
   selector: 'nav',
@@ -20,7 +19,6 @@ import {RouterItemService} from "./router-item-service";
             </ul>
     `,
   directives: [RouterItem],
-  providers: [RouterItemService]
 })
 export class NavigationBar {
   title:string;
@@ -34,7 +32,6 @@ export class NavigationBar {
     this.activeItem = null;
     this.router.subscribe((onNext) => {
       console.info("onNext: " + onNext);
-      // if enabled
       this.activeName = onNext;
 
       //console.info(this.router.isRouteActive(this.router.currentInstruction));
@@ -46,16 +43,4 @@ export class NavigationBar {
   isActiveItem(item:RouterItemType):boolean {
     return this.activeName === item.name.toLowerCase();
   }
-
-  onItemSelected(item:RouterItemType):void {
-    console.log("method onItemSelected");
-    if (!item.disabled) {
-      this.activeItem = item;
-    }
-  }
-
-  /*
-   (selectItemEvent) = 'onItemSelected($event)'
-
-   */
 }
