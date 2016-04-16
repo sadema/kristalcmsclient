@@ -18,9 +18,6 @@ import {CustomerService} from "../customer/customer-service";
         {{leadText}}
       </p>
     </div>
-    <div>
-      {{templatesUrl}}
-    </div>
     <templates [templateList] = "templates"></templates>
     <template-details></template-details>
   `,
@@ -35,23 +32,15 @@ import {CustomerService} from "../customer/customer-service";
 export class TemplatesPage {
   leadText:string;
   templates:ClickableItemType[];
-  templatesUrl: string = "";
 
   constructor(public http: Http, public customerService: CustomerService) {
     this.leadText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quod autem principium officii quaerunt, melius quam Pyrrho; Familiares nostros, credo, Sironem dicis et Philodemum, cum optimos viros, tum homines';
-/*
-    this.templates = [
-      {name: 'main', href: '#'},
-      {name: 'product list', href: '#'},
-      {name: 'product detail', href: '#', disabled: true},
-      {name: 'shopping card', href: '#'}
-    ];
-*/
+
     customerService.getCustomer("belastingdienst").subscribe(
       customer => {
-        this.templatesUrl = this.getTemplatesUrl(customer);
-        if (this.templatesUrl) {
-          this.createTemplateList(this.templatesUrl);
+        let templatesUrl = this._getTemplatesUrl(customer);
+        if (templatesUrl) {
+          this._createTemplateList(templatesUrl);
         }
       },
       error => {
@@ -59,7 +48,7 @@ export class TemplatesPage {
       });
   }
 
-  getTemplatesUrl(customer: Object):string {
+  _getTemplatesUrl(customer: Object):string {
     return customer["atom.link"].filter(function(link) {
       return link["@rel"] === "templates";
     }).map(function(templateLink) {
@@ -67,7 +56,7 @@ export class TemplatesPage {
     });
   }
 
-  createTemplateList(templatesUrl:string): void {
+  _createTemplateList(templatesUrl:string): void {
     this.customerService.getCustomerTemplateList(templatesUrl).subscribe(
       templateArr => {
         console.info(templateArr);

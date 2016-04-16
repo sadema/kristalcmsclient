@@ -13,10 +13,6 @@ import {Http} from 'angular2/http';
     <nav [routerList] = "menuItems">
     </nav>
     <div class="container">
-      <div>
-        {{data | json}}
-        {{city}}
-      </div>
       <router-outlet></router-outlet>
     </div>
     `,

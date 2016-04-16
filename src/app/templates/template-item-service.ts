@@ -8,7 +8,7 @@ import {Subject, BehaviorSubject, Observable} from "rxjs/Rx";
 
 @Injectable()
 export class TemplateItemService {
-  currentTemplateItem: Subject<ClickableItemType> = new BehaviorSubject<ClickableItemType>({name:'', href:''});
+  currentTemplateItem: Subject<ClickableItemType> = new BehaviorSubject<ClickableItemType>({id: '', name:'', href:''});
 
   /*
   obs = Observable.interval(500).take(5)

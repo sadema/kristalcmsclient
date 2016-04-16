@@ -20,23 +20,12 @@ import {TemplateItemService} from "./template-item-service";
 export class TemplateList {
   @Input() templateList: ClickableItemType[];
   additionalClasses:string;
-  id: string;
-  content: string;
 
   constructor(public templateItemService: TemplateItemService) {
     this.additionalClasses = "nav-link";
-    this.id = "";
-    this.content = "";
   }
 
   onItemSelected(item: ClickableItemType) {
     this.templateItemService.setCurrentTemplateItem(item);
-    /*
-    this.templateService.getTemplate()
-      .subscribe((templateData: any) => {
-        this.id = templateData['@id'];
-        this.content = templateData.content;
-      });
-      */
   }
 }
