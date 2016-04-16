@@ -28,7 +28,8 @@ export class TemplatePanel {
       console.log('new item is: ', templateItem.name);
       this.name = templateItem.name;
       if (this.name !== "") {
-        templateService.getTemplate(this.name).subscribe(
+        let href = templateItem.id;
+        templateService.getTemplate(href).subscribe(
           data => {
             this.data = data;
           },

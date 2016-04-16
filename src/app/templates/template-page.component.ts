@@ -22,6 +22,7 @@ import {CustomerService} from "../customer/customer-service";
       {{templatesUrl}}
     </div>
     <templates [templateList] = "templates"></templates>
+    <template-details></template-details>
   `,
   styles: [`
       .starter {
@@ -72,23 +73,18 @@ export class TemplatesPage {
         console.info(templateArr);
         this.templates = [];
         for (let i=0; i<templateArr.length; ++i) {
-          let item: ClickableItemType = {name: templateArr[i]["@id"], href: templateArr[i]["atom.link"]["@href"]};
+          let item: ClickableItemType = {
+              id: templateArr[i]["atom.link"]["@href"],
+              name: templateArr[i]["@id"],
+              href: "#",
+              disabled: false
+          };
           this.templates.push(item);
         }
       },
       error => {
         console.error(error);
       });
-      /*
-      .filter(function(template) {
-        return {};
-      });
-      */
   }
 
-  /*
-   <templates [templateList] = "templates"></templates>
-   <template-details></template-details>
-
-   */
 }
