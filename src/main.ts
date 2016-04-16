@@ -5,6 +5,7 @@ import * as ngCore from 'angular2/core';
 import * as browser from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
+import {CustomerService} from './app/customer/customer-service';
 import {TemplateItemService} from './app/templates/template-item-service';
 import {TemplateService} from './app/templates/template-service';
 
@@ -36,7 +37,7 @@ export function main() {
     ...ENV_PROVIDERS,
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS,
-      TemplateItemService, TemplateService,
+      CustomerService, TemplateItemService, TemplateService,
     ngCore.provide(LocationStrategy, { useClass: HashLocationStrategy })
   ])
   .catch(err => console.error(err));

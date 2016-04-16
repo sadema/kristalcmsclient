@@ -15,6 +15,7 @@ import {Http} from 'angular2/http';
     <div class="container">
       <div>
         {{data | json}}
+        {{city}}
       </div>
       <router-outlet></router-outlet>
     </div>
@@ -24,6 +25,7 @@ import {Http} from 'angular2/http';
 export class KristalcmsApp {
   menuItems:RouterItemType[];
   data: Object = {};
+  city: string = "";
   routeDefinitions: RouteDefinition[] = [
     { path: '/', name: 'Root', redirectTo: ['/Templates']},
     { path: '/templates', name: 'Templates', component: TemplatesPage, useAsDefault: true},
@@ -44,9 +46,16 @@ export class KristalcmsApp {
     console.log("ngOnInit......");
     var url = "http://localhost:8080/kristalcms/resources/cms/belastingdienst";
     this.http.get(url)
-      .map(response => response.json())
+      .map(response => {
+        this.data = response.json();
+        return response.json();
+      })
+      .map((payload) => {
+        let city = payload.customer.city;
+        return city;
+      })
       .subscribe(
-        data => this.data = data.customer,
+        data => this.city = data,
         error => console.log(error)
       );
   }
