@@ -7,7 +7,6 @@ import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {CmsService} from "./app/cms-service";
 import {CustomerService} from './app/customer/customer-service';
-import {TemplateItemService} from './app/templates/template-item-service';
 import {TemplateService} from './app/templates/template-service';
 import {ContentTypeService} from "./app/content/contenttype-service";
 
@@ -39,7 +38,7 @@ export function main() {
     ...ENV_PROVIDERS,
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS,
-      CmsService, CustomerService, TemplateItemService, TemplateService, ContentTypeService,
+      CmsService, CustomerService, TemplateService, ContentTypeService,
     ngCore.provide(LocationStrategy, { useClass: HashLocationStrategy })
   ])
   .catch(err => console.error(err));

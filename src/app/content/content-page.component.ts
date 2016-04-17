@@ -6,6 +6,7 @@ import {Component} from 'angular2/core';
 import {ClickableItemType} from "../core/clickable-item";
 import {CmsService} from "../cms-service";
 import {ContentTypeList} from "./contenttype-list.component";
+import {ContentTypePanel} from "./contenttype-panel";
 import {ContentTypeService} from "./contenttype-service";
 
 @Component({
@@ -13,8 +14,9 @@ import {ContentTypeService} from "./contenttype-service";
   template: `
     <h1>Content</h1>
     <content-types [contentTypeList] = "contentTypes"></content-types>
+    <contenttype-panel></contenttype-panel>
   `,
-  directives: [ContentTypeList]
+  directives: [ContentTypeList,ContentTypePanel]
 })
 export class ContentPage {
   contentTypes: ClickableItemType[];
@@ -41,8 +43,8 @@ export class ContentPage {
     this.contentTypeService.getContentTypeList(contentTypesUrl).subscribe(
       (contentTypeArr) => {
         this.contentTypes = [
-          {id: "", name: "Card", href: "#", disabled: false},
-          {id: "", name: "Carousel", href: "#", disabled: false}
+          {id: "", name: "Card", href: "#/content", disabled: false},
+          {id: "", name: "Carousel", href: "#/content", disabled: false}
         ];
       }
     );

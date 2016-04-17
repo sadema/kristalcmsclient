@@ -1,7 +1,7 @@
 import { Component, Input } from "angular2/core";
 import { ClickableItemType } from "../core/clickable-item";
 import { ClickableItem } from "../core/clickable-item.component";
-import {TemplateItemService} from "./template-item-service";
+import {TemplateService} from "./template-service";
 
 @Component({
   selector: 'templates',
@@ -21,11 +21,11 @@ export class TemplateList {
   @Input() templateList: ClickableItemType[];
   additionalClasses:string;
 
-  constructor(public templateItemService: TemplateItemService) {
+  constructor(public templateService: TemplateService) {
     this.additionalClasses = "nav-link";
   }
 
   onItemSelected(item: ClickableItemType) {
-    this.templateItemService.setCurrentTemplateItem(item);
+    this.templateService.setCurrentTemplateItem(item);
   }
 }

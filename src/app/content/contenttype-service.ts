@@ -23,6 +23,7 @@ export class ContentTypeService {
   }
 
   setCurrentContentTypeItem(item: ClickableItemType): void {
+    console.info("ContentTypeItem: " + item.name);
     this.currentContentTypeItem.next(item);
   }
 

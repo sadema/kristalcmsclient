@@ -3,7 +3,6 @@
  */
 
 import { Component } from 'angular2/core';
-import {TemplateItemService} from "./template-item-service";
 import {TemplateService} from './template-service';
 
 @Component({
@@ -23,8 +22,8 @@ export class TemplatePanel {
   content: string;
   data;
 
-  constructor(public templateItemService: TemplateItemService, public templateService: TemplateService) {
-    this.templateItemService.getCurrentTemplateItem().subscribe((templateItem) => {
+  constructor(public templateService: TemplateService) {
+    templateService.getCurrentTemplateItem().subscribe((templateItem) => {
       console.log('new item is: ', templateItem.name);
       this.name = templateItem.name;
       if (this.name !== "") {

@@ -38,22 +38,4 @@ export class KristalcmsApp {
     ];
   }
 
-  ngOnInit() {
-    console.log("ngOnInit......");
-    var url = "http://localhost:8080/kristalcms/resources/cms/belastingdienst";
-    this.http.get(url)
-      .map(response => {
-        this.data = response.json();
-        return response.json();
-      })
-      .map((payload) => {
-        let city = payload.customer.city;
-        return city;
-      })
-      .subscribe(
-        data => this.city = data,
-        error => console.log(error)
-      );
-  }
-
 }
