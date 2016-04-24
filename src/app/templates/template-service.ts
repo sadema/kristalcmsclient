@@ -2,26 +2,31 @@
  * Created by sjoerdadema on 24/03/16.
  */
 
-import { Injectable } from 'angular2/core';
-import { Http, Response, Headers } from 'angular2/http';
+import {Injectable} from 'angular2/core';
+import {Http, Response, Headers} from 'angular2/http';
 import {ClickableItemType} from "../core/clickable-item";
+import {ItemState} from "../core/itemstate";
 import {Subject, BehaviorSubject, Observable} from "rxjs/Rx";
 import 'rxjs/add/operator/map';
+import {CurrentItem} from "../core/current-item";
 
 @Injectable()
-export class TemplateService {
-  currentTemplateItem: Subject<ClickableItemType> = new BehaviorSubject<ClickableItemType>({id: '', name:'', href:''});
+export class TemplateService implements CurrentItem<ClickableItemType> {
 
-  constructor(public http: Http) {}
+  itemState: ItemState<ClickableItemType>;
 
-  setCurrentTemplateItem(item: ClickableItemType): void {
-    console.log(item.name);
-    this.currentTemplateItem.next(item);
+  constructor(public http: Http) {
+    this.itemState = new ItemState(new BehaviorSubject<ClickableItemType>({id: '', name:'', href:''}));
   }
 
-  getCurrentTemplateItem(): Subject<ClickableItemType> {
-    return this.currentTemplateItem;
+  setItem(item:ClickableItemType):void {
+    this.itemState.setItem(item);
   }
+
+  getItem():Subject<ClickableItemType>{
+    return this.itemState.getItem();
+  }
+
   getTemplate(href: string) {
     var headers = new Headers();
     headers.append('Accept', 'text/html');

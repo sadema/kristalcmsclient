@@ -9,7 +9,7 @@ import {ClickableItemType} from "../core/clickable-item";
 @Component({
   selector: 'contenttype-panel',
   template: `
-    <h3>Content types</h3>
+    <h3>Content type</h3>
     {{name}}
     <contenttype-contentlist [contentTypeContentList] = "contentList"></contenttype-contentlist>
   `
@@ -19,7 +19,7 @@ export class ContentTypePanel {
   contentList: ClickableItemType[];
 
   constructor(public contentTypeService: ContentTypeService) {
-    contentTypeService.getCurrentContentTypeItem().subscribe(contentTypeItem => {
+    contentTypeService.getItem().subscribe(contentTypeItem => {
       this.name = contentTypeItem.name;
 
     })

@@ -23,7 +23,7 @@ export class TemplatePanel {
   data;
 
   constructor(public templateService: TemplateService) {
-    templateService.getCurrentTemplateItem().subscribe((templateItem) => {
+    templateService.getItem().subscribe((templateItem) => {
       console.log('new item is: ', templateItem.name);
       this.name = templateItem.name;
       if (this.name !== "") {

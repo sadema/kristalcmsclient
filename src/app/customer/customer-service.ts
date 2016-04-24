@@ -17,8 +17,8 @@ export class CustomerService {
       .map(response => {
         return response.json();
       })
-      .map((payload) => {
-        return payload.customer;
+      .map((jsonObject) => {
+        return jsonObject.customer;
       });
   }
 

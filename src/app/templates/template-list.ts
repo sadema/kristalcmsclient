@@ -26,6 +26,6 @@ export class TemplateList {
   }
 
   onItemSelected(item: ClickableItemType) {
-    this.templateService.setCurrentTemplateItem(item);
+    this.templateService.setItem(item);
   }
 }

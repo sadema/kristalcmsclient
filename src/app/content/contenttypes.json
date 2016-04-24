@@ -1,0 +1,25 @@
+{
+  "contenttypes": {
+    "@id": "contenttypes",
+    "contenttypeList": [
+      {
+        "@id": "card",
+        "atom.link": {
+          "@rel": "self",
+          "@href": "http:\/\/localhost:8080\/kristalcms\/resources\/cms\/belastingdienst\/contenttypes\/card"
+        }
+      },
+      {
+        "@id": "carousel",
+        "atom.link": {
+          "@rel": "self",
+          "@href": "http:\/\/localhost:8080\/kristalcms\/resources\/cms\/belastingdienst\/contenttypes\/carousel"
+        }
+      }
+    ],
+    "atom.link": {
+      "@rel": "self",
+      "@href": "http:\/\/localhost:8080\/kristalcms\/resources\/cms\/belastingdienst\/contenttypes"
+    }
+  }
+}

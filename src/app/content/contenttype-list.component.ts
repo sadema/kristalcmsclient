@@ -30,7 +30,7 @@ export class ContentTypeList {
   }
 
   onItemSelected(item: ClickableItemType) {
-    this.contentTypeService.setCurrentContentTypeItem(item);
+    this.contentTypeService.setItem(item);
   }
 
 }
