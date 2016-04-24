@@ -27,6 +27,16 @@ export class TemplateService implements CurrentItem<ClickableItemType> {
     return this.itemState.getItem();
   }
 
+  getTemplates(href: string) {
+    return this.http.get(href)
+      .map(response => {
+        return response.json();
+      })
+      .map(jsonObject => {
+        return jsonObject.templates;
+      })
+  }
+
   getTemplate(href: string) {
     var headers = new Headers();
     headers.append('Accept', 'text/html');

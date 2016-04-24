@@ -1,0 +1,25 @@
+{
+  "card": {
+    "@id": "card",
+    "contentList": [
+      {
+        "@id": "javacard",
+        "atom.link": {
+          "@rel": "self",
+          "@href": "http:\/\/localhost:8080\/kristalcms\/resources\/cms\/belastingdienst\/contenttypes\/card\/content\/javacard"
+        }
+      },
+      {
+        "@id": "webcard",
+        "atom.link": {
+          "@rel": "self",
+          "@href": "http:\/\/localhost:8080\/kristalcms\/resources\/cms\/belastingdienst\/contenttypes\/card\/content\/webcard"
+        }
+      }
+    ],
+    "atom.link": {
+      "@rel": "self",
+      "@href": "http:\/\/localhost:8080\/kristalcms\/resources\/cms\/belastingdienst\/contenttypes\/card"
+    }
+  }
+}

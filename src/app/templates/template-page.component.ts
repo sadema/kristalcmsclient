@@ -6,8 +6,8 @@ import {Component} from 'angular2/core';
 import {ClickableItemType} from "../core/clickable-item";
 import {TemplateList} from './template-list';
 import {TemplatePanel} from './template-panel';
-import {Http} from "angular2/http";
 import {CustomerService} from "../customer/customer-service";
+import {TemplateService} from "./template-service";
 
 @Component({
   selector: 'templates-page',
@@ -31,49 +31,40 @@ import {CustomerService} from "../customer/customer-service";
 })
 export class TemplatesPage {
   leadText:string;
-  templates:ClickableItemType[];
+  templates:Array<ClickableItemType> = [];
 
-  constructor(public http: Http, public customerService: CustomerService) {
+  constructor(public customerService: CustomerService, public templateService: TemplateService) {
     this.leadText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quod autem principium officii quaerunt, melius quam Pyrrho; Familiares nostros, credo, Sironem dicis et Philodemum, cum optimos viros, tum homines';
 
-    customerService.getCustomer("belastingdienst").subscribe(
-      customer => {
-        let templatesUrl = this._getTemplatesUrl(customer);
-        if (templatesUrl) {
-          this._createTemplateList(templatesUrl);
-        }
-      },
-      error => {
-        console.error(error);
-      });
-  }
+    customerService.getTemplatesUrl().subscribe(
+      url => {
+        console.info(url);
+        this._createTemplateList(url);
+      }
+    )
 
-  _getTemplatesUrl(customer: Object):string {
-    return customer["atom.link"].filter(function(link) {
-      return link["@rel"] === "templates";
-    }).map(function(templateLink) {
-      return templateLink["@href"];
-    });
   }
 
   _createTemplateList(templatesUrl:string): void {
-    this.customerService.getCustomerTemplateList(templatesUrl).subscribe(
-      templateArr => {
-        console.info(templateArr);
+    console.info(templatesUrl);
+    this.templateService.getTemplates(templatesUrl).subscribe(
+      templates => {
         this.templates = [];
+        let templateArr = templates.templateList;
         for (let i=0; i<templateArr.length; ++i) {
           let item: ClickableItemType = {
-              id: templateArr[i]["atom.link"]["@href"],
-              name: templateArr[i]["@id"],
-              href: "#",
-              disabled: false
+            id: templateArr[i]["atom.link"]["@href"],
+            name: templateArr[i]["@id"],
+            href: "#",
+            disabled: false
           };
           this.templates.push(item);
         }
       },
       error => {
         console.error(error);
-      });
+      }
+    );
   }
 
 }

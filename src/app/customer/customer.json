@@ -1,0 +1,25 @@
+{
+  "customer": {
+    "@id": "belastingdienst",
+    "version": 2.1,
+    "city": "Apeldoorn",
+    "atom.link": [
+      {
+        "@rel": "self",
+        "@href": "http://localhost:8080/kristalcms/resources/cms/belastingdienst"
+      },
+      {
+        "@rel": "contenttypes",
+        "@href": "http://localhost:8080/kristalcms/resources/cms/belastingdienst/contenttypes"
+      },
+      {
+        "@rel": "templates",
+        "@href": "http://localhost:8080/kristalcms/resources/cms/belastingdienst/templates"
+      },
+      {
+        "@rel": "pages",
+        "@href": "http://localhost:8080/kristalcms/resources/cms/belastingdienst/pages"
+      }
+    ]
+  }
+}

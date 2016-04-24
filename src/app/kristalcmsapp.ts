@@ -6,13 +6,15 @@ import {TemplatesPage} from './templates/template-page.component';
 import {PagesPage} from './pages/pages-page.component';
 import {ContentPage} from './content/content-page.component';
 import {Http} from 'angular2/http';
+import {CustomerService} from "./customer/customer-service";
 
 @Component({
   selector: 'kristalcms-app',
   template: `
-    <nav [routerList] = "menuItems">
+    <nav  [routerList] = "menuItems">
     </nav>
     <div class="container">
+      <div><p>{{customer["@id"]}}</p></div>
       <router-outlet></router-outlet>
     </div>
     `,
@@ -20,8 +22,7 @@ import {Http} from 'angular2/http';
 })
 export class KristalcmsApp {
   menuItems:RouterItemType[];
-  data: Object = {};
-  city: string = "";
+  customer: Object = {id: ""};
   routeDefinitions: RouteDefinition[] = [
     { path: '/', name: 'Root', redirectTo: ['/Templates']},
     { path: '/templates', name: 'Templates', component: TemplatesPage, useAsDefault: true},
@@ -29,13 +30,17 @@ export class KristalcmsApp {
     { path: '/content', name: 'Content', component: ContentPage},
   ];
 
-  constructor(public http: Http, public router: Router) {
+  constructor(public http: Http, public router: Router, public customerService:CustomerService) {
     router.config(this.routeDefinitions);
     this.menuItems = [
       {name: 'Templates', link: ['/Templates'], disabled: false},
       {name: 'Pages', link: ['/Pages'], disabled: false},
       {name: 'Content', link: ['/Content'], disabled: false}
     ];
+    customerService.getCustomer("belastingdienst")
+      .subscribe(customer => {
+        this.customer = customer;
+      })
   }
 
 }

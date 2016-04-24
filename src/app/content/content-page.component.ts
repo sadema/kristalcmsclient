@@ -4,7 +4,7 @@
 
 import {Component} from 'angular2/core';
 import {ClickableItemType} from "../core/clickable-item";
-import {CmsService} from "../cms-service";
+import {CustomerService} from "../customer/customer-service";
 import {ContentTypeList} from "./contenttype-list.component";
 import {ContentTypePanel} from "./contenttype-panel";
 import {ContentTypeService} from "./contenttype-service";
@@ -19,33 +19,28 @@ import {ContentTypeService} from "./contenttype-service";
   directives: [ContentTypeList,ContentTypePanel]
 })
 export class ContentPage {
-  contentTypes: ClickableItemType[];
+  contentTypes: Array<ClickableItemType> = [];
 
-  constructor(public cmsService: CmsService, public contentTypeService: ContentTypeService) {
-    cmsService.getRoot().subscribe(
-      (data) => {
-        let contentTypesUrl = this._getContentTypesUrl(data);
-        if (contentTypesUrl) {
-          this._createContentTypeList(contentTypesUrl);
-        }
-      },
-      error => {
-        console.error(error);
+  constructor(public customerService: CustomerService, public contentTypeService: ContentTypeService) {
+
+    customerService.getContentTypesUrl().subscribe(
+      (url) => {
+        this._createContentTypeList(url);
       }
-    );
-  }
+    )
 
-  _getContentTypesUrl(data: Object):string {
-    return "http://localhost:8080/cms/contenttypes";
   }
 
   _createContentTypeList(contentTypesUrl:string): void {
-    this.contentTypeService.getContentTypeList(contentTypesUrl).subscribe(
-      (contentTypeArr) => {
-        this.contentTypes = [
-          {id: "", name: "Card", href: "#/content", disabled: false},
-          {id: "", name: "Carousel", href: "#/content", disabled: false}
-        ];
+    this.contentTypeService.getContentTypes(contentTypesUrl).subscribe(
+      (contenttypes) => {
+        this.contentTypes = [];
+        let contenttypesArr = contenttypes.contenttypeList;
+        for (let i=0; i<contenttypesArr.length; i++) {
+          let href = contenttypesArr[i]["atom.link"]["@href"];
+          let contentType:ClickableItemType = {id: href, name: contenttypesArr[i]["@id"], href: "#/content", disabled: false};
+          this.contentTypes.push(contentType);
+        }
       }
     );
   }

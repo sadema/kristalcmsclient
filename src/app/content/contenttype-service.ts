@@ -26,11 +26,27 @@ export class ContentTypeService implements CurrentItem<ClickableItemType> {
     return this.itemState.getItem();
   }
 
-  getContentTypeList(href: string) {
-    // TODO: http.get implementeren
-    return new Observable(observer => {
-      observer.next("bla");
-    });
+  getContentTypes(href: string) {
+    // TODO: href verwijderen
+    href = "./app/content/contenttypes.json";
+    return this.http.get(href)
+      .map(response => {
+        return response.json();
+      })
+      .map(jsonObject => {
+        return jsonObject.contenttypes;
+      });
+  }
+
+  getContentType(href: string) {
+    href = "./app/content/card.json";
+    return this.http.get(href)
+      .map(response => {
+        return response.json();
+      })
+      .map(jsonObject => {
+        return jsonObject.card;
+      });
   }
 
 }

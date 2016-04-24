@@ -24,8 +24,7 @@ export class NavigationBar {
   title:string;
   activeItem:RouterItemType;
   activeName: string;
-  @Input()
-  routerList:RouterItemType[];
+  @Input() routerList:RouterItemType[];
 
   constructor(public router: Router) {
     this.title = 'Kristal Software';

@@ -13,7 +13,7 @@ export class CmsService {
   getRoot() {
     // todo http.get
     return new Observable(observer => {
-      observer.next({"href": "http://localhost:8080/cms/contenttypes"});
+      observer.next({"href": "http://localhost:8080/cms/belastingdienst/contenttypes"});
       observer.complete();
     });
   }

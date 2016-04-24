@@ -5,37 +5,46 @@
 import { Component } from 'angular2/core';
 import {ContentTypeService} from "./contenttype-service";
 import {ClickableItemType} from "../core/clickable-item";
+import {ContentTypeContentList} from "./contenttype-contentlist.component";
 
 @Component({
   selector: 'contenttype-panel',
   template: `
     <h3>Content type</h3>
     {{name}}
+    {{href}}
     <contenttype-contentlist [contentTypeContentList] = "contentList"></contenttype-contentlist>
-  `
+  `,
+  directives: [ContentTypeContentList]
 })
 export class ContentTypePanel {
   name: string;
+  href: string;
   contentList: ClickableItemType[];
 
   constructor(public contentTypeService: ContentTypeService) {
     contentTypeService.getItem().subscribe(contentTypeItem => {
       this.name = contentTypeItem.name;
-
+      this._createContentTypeContentList(contentTypeItem.id);
     })
   }
 
-  _getContentListUrl(data: Object):string {
-    return "http://localhost:8080/cms/contenttypes/card";
-  }
-
   _createContentTypeContentList(contentListUrl:string): void {
-    this.contentTypeService.getContentTypeList(contentListUrl).subscribe(
-      (contentTypeArr) => {
-        this.contentList = [
+    this.href = contentListUrl;
+    this.contentTypeService.getContentType(contentListUrl).subscribe(
+      (type) => {
+        this.contentList = [];
+        let contentArr = type.contentList;
+        for (let i=0; i<contentArr.length; ++i) {
+          let name = contentArr[i]["@id"];
+          let href = contentArr[i]["atom.link"]["@href"];
+          let content = {id: href, name: name, href: "#/content", disabled: false};
+          this.contentList.push(content);
+        }
+        /*
           {id: "", name: "JavaCard", href: "#/content", disabled: false},
           {id: "", name: "WebCard", href: "#/content", disabled: false}
-        ];
+        */
       }
     );
   }
