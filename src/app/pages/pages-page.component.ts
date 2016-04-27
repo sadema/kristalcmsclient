@@ -4,11 +4,13 @@
 
 import {Component} from 'angular2/core';
 import {CanActivate} from 'angular2/router';
+import {NavigationService} from "../navigation/navigation-service";
 
 @Component({
   selector: 'pages-page',
   template: `
     <h1>Pages</h1>
+    <p>{{pagesHref}}</p>
   `
 })
 @CanActivate((next, prev) => {
@@ -17,8 +19,13 @@ import {CanActivate} from 'angular2/router';
 })
 export class PagesPage {
 
-  constructor() {
+  pagesHref: string = "";
+
+  constructor(private navigationService: NavigationService) {
     console.info("PagesPage constructor");
+    navigationService.getItem().subscribe(item => {
+      this.pagesHref = item.href;
+    });
   }
 
   /*

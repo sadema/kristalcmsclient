@@ -8,26 +8,37 @@ import {CustomerService} from "../customer/customer-service";
 import {ContentTypeList} from "./contenttype-list.component";
 import {ContentTypePanel} from "./contenttype-panel";
 import {ContentTypeService} from "./contenttype-service";
+import {NavigationService} from "../navigation/navigation-service";
 
 @Component({
   selector: 'content-page',
   template: `
     <h1>Content</h1>
+    <p>{{contentHref}}</p>
     <content-types [contentTypeList] = "contentTypes"></content-types>
     <contenttype-panel></contenttype-panel>
   `,
   directives: [ContentTypeList,ContentTypePanel]
 })
 export class ContentPage {
+
+  contentHref: string = "";
   contentTypes: Array<ClickableItemType> = [];
 
-  constructor(public customerService: CustomerService, public contentTypeService: ContentTypeService) {
+  constructor(private navigationService: NavigationService, public customerService: CustomerService, public contentTypeService: ContentTypeService) {
 
+    navigationService.getItem().subscribe(routerItem => {
+      this.contentHref = routerItem.href;
+      this._createContentTypeList(routerItem.href);
+    });
+
+    /*
     customerService.getContentTypesUrl().subscribe(
       (url) => {
         this._createContentTypeList(url);
       }
     )
+    */
 
   }
 

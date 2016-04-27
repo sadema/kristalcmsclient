@@ -2,6 +2,7 @@ import {Component,Input} from 'angular2/core';
 import {RouterItemType} from '../core/router-item';
 import {RouterItem} from "../core/router-item.component";
 import {Router,RouteDefinition} from 'angular2/router';
+import {Subject} from "rxjs/Rx";
 
 @Component({
   selector: 'nav',

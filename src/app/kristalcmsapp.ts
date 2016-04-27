@@ -7,6 +7,8 @@ import {PagesPage} from './pages/pages-page.component';
 import {ContentPage} from './content/content-page.component';
 import {Http} from 'angular2/http';
 import {CustomerService} from "./customer/customer-service";
+import {Subject} from "rxjs/Rx";
+import {BehaviorSubject} from "rxjs/Rx";
 
 @Component({
   selector: 'kristalcms-app',
@@ -31,16 +33,28 @@ export class KristalcmsApp {
   ];
 
   constructor(public http: Http, public router: Router, public customerService:CustomerService) {
-    router.config(this.routeDefinitions);
-    this.menuItems = [
-      {name: 'Templates', link: ['/Templates'], disabled: false},
-      {name: 'Pages', link: ['/Pages'], disabled: false},
-      {name: 'Content', link: ['/Content'], disabled: false}
-    ];
     customerService.getCustomer("belastingdienst")
       .subscribe(customer => {
         this.customer = customer;
+        router.config(this.routeDefinitions);
+        let href = "http://localhost:8080/kristalcms/resources/cms/belastingdienst/contenttypes";
+        console.info(this._getUrl("templates"));
+        this.menuItems = [
+          {href: this._getUrl("templates"), name: 'Templates', link: ['/Templates'], disabled: false},
+          {href: this._getUrl("pages"), name: 'Pages', link: ['/Pages'], disabled: false},
+          {href: href, name: 'Content', link: ['/Content'], disabled: false}
+        ];
+        console.info(this.menuItems);
+        //this.menuItems.next({href: this._getUrl("templates"), name: 'Templates', link: ['/Templates'], disabled: false});
       })
+  }
+
+  _getUrl(rel: string): string {
+    return this.customer["atom.link"].filter(function(link) {
+      return link["@rel"] === rel;
+    }).map(link => {
+      return link["@href"];
+    });
   }
 
 }

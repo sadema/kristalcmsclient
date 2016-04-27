@@ -5,7 +5,7 @@ import * as ngCore from 'angular2/core';
 import * as browser from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
-import {CmsService} from "./app/cms-service";
+import {NavigationService} from "./app/navigation/navigation-service";
 import {CustomerService} from './app/customer/customer-service';
 import {TemplateService} from './app/templates/template-service';
 import {ContentTypeService} from "./app/content/contenttype-service";
@@ -38,7 +38,7 @@ export function main() {
     ...ENV_PROVIDERS,
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS,
-      CmsService, CustomerService, TemplateService, ContentTypeService,
+      NavigationService, CustomerService, TemplateService, ContentTypeService,
     ngCore.provide(LocationStrategy, { useClass: HashLocationStrategy })
   ])
   .catch(err => console.error(err));
