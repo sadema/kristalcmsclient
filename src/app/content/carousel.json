@@ -1,0 +1,18 @@
+{
+  "contenttype": {
+    "@id": "carousel",
+    "contentList": [
+      {
+        "@id": "intro",
+        "atom.link": {
+          "@rel": "self",
+          "@href": "http:\/\/localhost:8080\/kristalcms\/resources\/cms\/belastingdienst\/contenttypes\/carousel\/content\/intro"
+        }
+      }
+    ],
+    "atom.link": {
+      "@rel": "self",
+      "@href": "http:\/\/localhost:8080\/kristalcms\/resources\/cms\/belastingdienst\/contenttypes\/carousel"
+    }
+  }
+}

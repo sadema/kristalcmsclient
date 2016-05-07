@@ -39,13 +39,18 @@ export class ContentTypeService implements CurrentItem<ClickableItemType> {
   }
 
   getContentType(href: string) {
-    href = "./app/content/card.json";
+    if (href.endsWith("carousel")) {
+      href = "./app/content/carousel.json"
+    }
+    else {
+      href = "./app/content/card.json";
+    }
     return this.http.get(href)
       .map(response => {
         return response.json();
       })
       .map(jsonObject => {
-        return jsonObject.card;
+        return jsonObject.contenttype;
       });
   }
 

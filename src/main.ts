@@ -9,6 +9,7 @@ import {NavigationService} from "./app/navigation/navigation-service";
 import {CustomerService} from './app/customer/customer-service';
 import {TemplateService} from './app/templates/template-service';
 import {ContentTypeService} from "./app/content/contenttype-service";
+import {ContentTypeContentService} from "./app/content/contenttype-content-service";
 
 /*
  * App Environment Providers
@@ -38,7 +39,7 @@ export function main() {
     ...ENV_PROVIDERS,
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS,
-      NavigationService, CustomerService, TemplateService, ContentTypeService,
+      NavigationService, CustomerService, TemplateService, ContentTypeService, ContentTypeContentService,
     ngCore.provide(LocationStrategy, { useClass: HashLocationStrategy })
   ])
   .catch(err => console.error(err));

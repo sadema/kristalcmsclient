@@ -5,6 +5,7 @@
 import {Component,Input} from "angular2/core";
 import {ClickableItem} from "../core/clickable-item.component";
 import {ClickableItemType} from "../core/clickable-item";
+import {ContentTypeContentService} from "./contenttype-content-service";
 
 @Component({
   selector: 'contenttype-contentlist',
@@ -23,8 +24,13 @@ import {ClickableItemType} from "../core/clickable-item";
 export class ContentTypeContentList {
   @Input() contentTypeContentList: ClickableItemType[];
 
-  constructor() {
-
+  constructor(private typeContentService: ContentTypeContentService) {
+    typeContentService.getItem().subscribe(item => {
+      console.info("......." + item.id);
+    })
   }
 
+  onItemSelected(item: ClickableItemType) {
+    this.typeContentService.setItem(item);
+  }
 }

@@ -4,9 +4,8 @@
 
 import {Component} from 'angular2/core';
 import {ClickableItemType} from "../core/clickable-item";
-import {CustomerService} from "../customer/customer-service";
 import {ContentTypeList} from "./contenttype-list.component";
-import {ContentTypePanel} from "./contenttype-panel";
+import {ContentTypePanel} from "./contenttype-panel.component";
 import {ContentTypeService} from "./contenttype-service";
 import {NavigationService} from "../navigation/navigation-service";
 
@@ -25,20 +24,12 @@ export class ContentPage {
   contentHref: string = "";
   contentTypes: Array<ClickableItemType> = [];
 
-  constructor(private navigationService: NavigationService, public customerService: CustomerService, public contentTypeService: ContentTypeService) {
+  constructor(private navigationService: NavigationService, public contentTypeService: ContentTypeService) {
 
     navigationService.getItem().subscribe(routerItem => {
       this.contentHref = routerItem.href;
       this._createContentTypeList(routerItem.href);
     });
-
-    /*
-    customerService.getContentTypesUrl().subscribe(
-      (url) => {
-        this._createContentTypeList(url);
-      }
-    )
-    */
 
   }
 

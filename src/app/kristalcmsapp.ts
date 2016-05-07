@@ -45,7 +45,6 @@ export class KristalcmsApp {
           {href: href, name: 'Content', link: ['/Content'], disabled: false}
         ];
         console.info(this.menuItems);
-        //this.menuItems.next({href: this._getUrl("templates"), name: 'Templates', link: ['/Templates'], disabled: false});
       })
   }
 

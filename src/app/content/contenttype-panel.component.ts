@@ -6,6 +6,7 @@ import { Component } from 'angular2/core';
 import {ContentTypeService} from "./contenttype-service";
 import {ClickableItemType} from "../core/clickable-item";
 import {ContentTypeContentList} from "./contenttype-contentlist.component";
+import {ContentTypeContentPanel} from "./contenttype-content-panel.component";
 
 @Component({
   selector: 'contenttype-panel',
@@ -14,8 +15,9 @@ import {ContentTypeContentList} from "./contenttype-contentlist.component";
     {{name}}
     {{href}}
     <contenttype-contentlist [contentTypeContentList] = "contentList"></contenttype-contentlist>
+    <contenttype-contentpanel></contenttype-contentpanel>
   `,
-  directives: [ContentTypeContentList]
+  directives: [ContentTypeContentList,ContentTypeContentPanel]
 })
 export class ContentTypePanel {
   name: string;
@@ -41,10 +43,6 @@ export class ContentTypePanel {
           let content = {id: href, name: name, href: "#/content", disabled: false};
           this.contentList.push(content);
         }
-        /*
-          {id: "", name: "JavaCard", href: "#/content", disabled: false},
-          {id: "", name: "WebCard", href: "#/content", disabled: false}
-        */
       }
     );
   }
